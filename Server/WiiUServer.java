@@ -1,4 +1,3 @@
-package com.johnfreed.wiiupccontroller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +15,7 @@ public class WiiUServer {
  
  private int mPort = 1337;
  private boolean mPrintDebugStatements = false;
- //private PCController mController;
+ private PCController mController;
  
  // Thanks for the info http://wiiubrew.org/wiki/Internet_Browser !
  private static final int A_BUTTON_MASK = 32768;
@@ -95,6 +94,9 @@ public class WiiUServer {
     String output;
     
     while (scanner.hasNextLine()) {
+      
+     abut=0;
+     bbut=0;
      String line = scanner.nextLine();
      
      if (line.equals("")) {
@@ -114,23 +116,23 @@ public class WiiUServer {
        
        long holdData = Double.valueOf(holdDataString).longValue();
        
-       // A button held
-       if ((holdData & A_BUTTON_MASK) == A_BUTTON_MASK) {
-       abut = 1;
-       }
-       else{
-       abut = 0;
-       }
+//       // A button held
+//       if ((holdData & A_BUTTON_MASK) == A_BUTTON_MASK) {
+//       abut = 1;
+//       }
+//       else{
+//       abut = 0;
+//       }
+//       
+//       // B button held
+//       if ((holdData & B_BUTTON_MASK) == B_BUTTON_MASK) {
+//       bbut = 1;
+//       }
+//       else{
+//       bbut = 0;
+//       }
        
-       // B button held
-       if ((holdData & B_BUTTON_MASK) == B_BUTTON_MASK) {
-       bbut = 1;
-       }
-       else{
-       bbut = 0;
-       }
-       
-       output = String.format("%f, %f, %f, %f, %d, %d", lXDeflection, lYDeflection, XDeflection, YDeflection, abut, bbut);
+       output = String.format("%f,%f,%f,%f", lXDeflection, lYDeflection, XDeflection, YDeflection);
        
        System.out.println(output);
        //ssm.sendText(output);

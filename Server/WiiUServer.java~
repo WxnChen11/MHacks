@@ -1,4 +1,3 @@
-package com.johnfreed.wiiupccontroller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +15,7 @@ public class WiiUServer {
  
  private int mPort = 1337;
  private boolean mPrintDebugStatements = false;
- //private PCController mController;
+ private PCController mController;
  
  // Thanks for the info http://wiiubrew.org/wiki/Internet_Browser !
  private static final int A_BUTTON_MASK = 32768;
@@ -109,8 +108,6 @@ public class WiiUServer {
        // Right Stick
        float XDeflection = data.get("rStickX");
        float YDeflection = data.get("rStickY");
-       float lXDeflection = data.get("lStickX");
-       float lYDeflection = data.get("lStickY");
        
        long holdData = Double.valueOf(holdDataString).longValue();
        
@@ -130,7 +127,7 @@ public class WiiUServer {
        bbut = 0;
        }
        
-       output = String.format("%f, %f, %f, %f, %d, %d", lXDeflection, lYDeflection, XDeflection, YDeflection, abut, bbut);
+       output = String.format("%f, %f, %d, %d", XDeflection, YDeflection, abut, bbut);
        
        System.out.println(output);
        //ssm.sendText(output);
