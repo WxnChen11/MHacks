@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				// Active camera will refresh every 2 seconds
+				var counter = 0;
+				var TIMEOUT = 150;
+				var refreshInterval = setInterval(function() {
+					$('img#camera').attr('src', 'http://35.2.59.247:3000/camera?i=' + counter);
+					counter+=1;
+				}, TIMEOUT);	
+			});
+		</script>
+	</head>
+	<body>
+		<img src="" id="camera">
+	</body>
+</html>
