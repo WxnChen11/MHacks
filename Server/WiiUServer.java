@@ -1,4 +1,5 @@
-
+import java.io.*;  
+import java.net.*; 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,16 +42,12 @@ public class WiiUServer {
  public void StartServer() throws IOException {
   ServerSocket serverSocket = new ServerSocket(mPort);
   System.out.println("Wii U PC Controller Server running on port " + mPort);
-  SuperSocketMaster ssm;
-  ssm = new SuperSocketMaster(1234);
-  Thread ssmthread = new Thread(ssm);
-  ssmthread.start();
+  
+
   
   while (true) {
    try {
-    System.out.println("round 2");
     Socket socket = serverSocket.accept();
-    System.out.println("def doesn't get here");
     Scanner scanner = new Scanner(socket.getInputStream());
     
     String nextLine = scanner.nextLine();
@@ -71,7 +68,6 @@ public class WiiUServer {
      out.flush();
      out.close();
      scanner.close();
-     System.out.println("the fuck");
      continue;
     }
     
@@ -102,8 +98,6 @@ public class WiiUServer {
     String output;
     
     while (scanner.hasNextLine()) {
-      
-     System.out.println("scanner");
       
      abut=0;
      bbut=0;
@@ -142,9 +136,16 @@ public class WiiUServer {
 //       bbut = 0;
 //       }
        
-       output = String.format("%f,%f,%f,%f", lXDeflection, lYDeflection, XDeflection, YDeflection);
-       
+       output = String.format("%f,%f,%f,%f", (lXDeflection*(650))+1940, (lYDeflection*(650))+1940, (XDeflection*(650))+1940, (YDeflection*(650))+1940);
+       Socket soc=new Socket("35.2.103.164",1338);  
+       DataOutputStream dout=new DataOutputStream(soc.getOutputStream());  
        System.out.println(output);
+       dout.writeUTF(output + "\n");
+       dout.flush();
+       dout.close();
+       soc.close();
+       
+       
        //ssm.sendText(output);
        
        
@@ -167,6 +168,8 @@ public class WiiUServer {
     printDebugMessage("Caught exception: " + ex.getMessage());
    }
   }
+  //  
+  //
  }
  
  private HashMap<String, Float> ParseWiiUData(String JSON) {

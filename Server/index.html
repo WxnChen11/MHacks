@@ -24,7 +24,7 @@
         var gamepadData = window.wiiu.gamepad.update();
 
         // Send the gamepad data to the server
-        request.open("POST", "http://35.2.59.247:1337/Command", true);
+        request.open("POST", "http://35.2.103.164:1337/Command", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send(JSON.stringify(gamepadData));
 
@@ -63,7 +63,9 @@
 </script>
 
 <body onload="init()">
-    <p>Hello World</p>
+  <video src="http://35.2.50.111:8081/">
+  Your browser does not support the VIDEO tag and/or RTP streams.
+  </video>
     </br>
     <p id='isEnabled'></p>
     <p id='hold'></p>
