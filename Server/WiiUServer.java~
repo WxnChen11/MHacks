@@ -94,6 +94,9 @@ public class WiiUServer {
     String output;
     
     while (scanner.hasNextLine()) {
+      
+     abut=0;
+     bbut=0;
      String line = scanner.nextLine();
      
      if (line.equals("")) {
@@ -108,26 +111,28 @@ public class WiiUServer {
        // Right Stick
        float XDeflection = data.get("rStickX");
        float YDeflection = data.get("rStickY");
+       float lXDeflection = data.get("lStickX");
+       float lYDeflection = data.get("lStickY");
        
        long holdData = Double.valueOf(holdDataString).longValue();
        
-       // A button held
-       if ((holdData & A_BUTTON_MASK) == A_BUTTON_MASK) {
-       abut = 1;
-       }
-       else{
-       abut = 0;
-       }
+//       // A button held
+//       if ((holdData & A_BUTTON_MASK) == A_BUTTON_MASK) {
+//       abut = 1;
+//       }
+//       else{
+//       abut = 0;
+//       }
+//       
+//       // B button held
+//       if ((holdData & B_BUTTON_MASK) == B_BUTTON_MASK) {
+//       bbut = 1;
+//       }
+//       else{
+//       bbut = 0;
+//       }
        
-       // B button held
-       if ((holdData & B_BUTTON_MASK) == B_BUTTON_MASK) {
-       bbut = 1;
-       }
-       else{
-       bbut = 0;
-       }
-       
-       output = String.format("%f, %f, %d, %d", XDeflection, YDeflection, abut, bbut);
+       output = String.format("%f,%f,%f,%f", lXDeflection, lYDeflection, XDeflection, YDeflection);
        
        System.out.println(output);
        //ssm.sendText(output);

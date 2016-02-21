@@ -48,16 +48,22 @@ public class WiiUServer {
   
   while (true) {
    try {
+    System.out.println("round 2");
     Socket socket = serverSocket.accept();
+    System.out.println("def doesn't get here");
     Scanner scanner = new Scanner(socket.getInputStream());
     
     String nextLine = scanner.nextLine();
     
+
     // Main page
     if (nextLine.split(" ")[1].equals("/")) {
      printDebugMessage("User connected");
+     
      System.out.println(System.getProperty("user.dir"));
+     System.out.println("crashes here");
      PrintWriter out = new PrintWriter(socket.getOutputStream());
+     System.out.println("gets past first output stream");
      out.println("HTTP/1.1 200 OK");
      out.println("Content-Type: text/html");
      out.println();
@@ -65,6 +71,7 @@ public class WiiUServer {
      out.flush();
      out.close();
      scanner.close();
+     System.out.println("the fuck");
      continue;
     }
     
@@ -72,6 +79,7 @@ public class WiiUServer {
     if (nextLine.split(" ")[1].equals("/favicon.ico")) {
      printDebugMessage("Requested favicon");
      PrintWriter out = new PrintWriter(socket.getOutputStream());
+     System.out.println("gets output stream");     
      out.println("HTTP/1.1 404 Not Found");
      out.println();
      out.flush();
@@ -94,6 +102,8 @@ public class WiiUServer {
     String output;
     
     while (scanner.hasNextLine()) {
+      
+     System.out.println("scanner");
       
      abut=0;
      bbut=0;
