@@ -9,7 +9,7 @@
   url = require('url');
 
   paparazzo = new Paparazzo({
-    host: '35.2.50.111',
+    host: '35.2.58.188',
     port: 8081,
     path: '/'
   });
